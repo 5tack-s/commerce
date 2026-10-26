@@ -1,0 +1,35 @@
+services:
+  database:
+    container_name: database
+    image: postgres:17.11-alpine3.23
+    environment:
+      POSTGRES_DB: commerce
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d commerce"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    
+  # backend:
+  #   container_name: backend
+  #   build: 
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 127.0.0.1:3000:3000
+
+
+volumes:
+  postgres_data:
+
+secrets:
+  db_password:
+    file: ./db_password

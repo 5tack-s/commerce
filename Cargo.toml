@@ -1,0 +1,26 @@
+[package]
+name = "commerce"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serde = "1.0.229"
+axum = "0.8.9"
+log = "0.4.34"
+sea-orm = { version = "2.0", features = ["schema-sync", "entity-registry", "runtime-tokio-native-tls", "sqlx-postgres"] }
+tokio = { version = "1.54.0", features = ["full"] }
+env_logger = { version = "0.11" }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+async-trait = "0.1.92"
+argon2 = {version = "0.6.0", features = ["getrandom"]}
+getrandom = "0.4.3"
+jsonwebtoken = {version= "11.1.0", features= ["rust_crypto"]}
+dotenvy = "0.15.7"
+axum-login = "0.18.0"
+password-auth = "1.0.0"
+tower-sessions = {version= "0.14.0", features = ["memory-store"] }
+serde_json = "1.0.154"
+
+[workspace]
+members = [".", "migration"]

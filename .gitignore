@@ -1,0 +1,4 @@
+/target
+.env
+db_password
+src/entities
